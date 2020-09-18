@@ -1,0 +1,26 @@
+{
+  "expo": {
+    "name": "Tunisian-route-inspecteur",
+    "description": "React-native app built with expo, a starter project with splash screen, login form and custom drawer navigation.\n",
+    "slug": "Tunisian-route-inspecteur",
+    "privacy": "public",
+    "sdkVersion": "37.0.0",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "githubUrl": "https://github.com/gabriel-TheCode/rn-sample-drawer-app/"
+  }
+}
