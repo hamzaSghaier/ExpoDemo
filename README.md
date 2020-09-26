@@ -1,23 +1,32 @@
 1. Clone and Install
 # Clone the repo:
-git clone https://github.com/hamzaSghaier/ExpoDemo.git
+
+$ git clone https://github.com/hamzaSghaier/ExpoDemo.git
 
 # Move to the appropriate directory:
-cd ExpoDemo
+
+
+$ cd ExpoDemo
 
 # Install dependencies:
-npm install
+
+
+$ npm install
 
 2.1 Open RNS with Expo
 First, you need to install Expo CLI (if you don't have it yet). You can do it by running the following command in terminal:
 
-npm install expo-cli --global
+
+
+$ npm install expo-cli --global
 
 
 
 2.2 Run the React Native App
 # Start the React Native packager
-expo start
+
+
+$ expo start
 
 
 
