@@ -1,41 +1,32 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, TouchableOpacity, Image, Text } from 'react-native';
 import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 import { createStackNavigator } from 'react-navigation'
-import { Card, CardItem, Thumbnail, Left, Body, Button } from 'native-base';
+import {  CardItem, Thumbnail, Left, Body } from 'native-base';
+import { Text, View, StyleSheet, Image, TouchableOpacity,SafeAreaView, ScrollView, Switch } from 'react-native';
+import { Card, ListItem, Button } from 'react-native-elements'
 
 class MyPage2 extends Component {
   render() {
     return (
       <View style={styles.container}>
 
-        <Card style={styles.card}>
-          <CardItem>
-            <Left>
-              <Thumbnail source={require('../assets/avatar.png')} />
-              <Body>
-                <Text>John Doe</Text>
-                <Text style={{ color: 'grey' }}>April 15, 2018</Text>
-              </Body>
-            </Left>
-          </CardItem>
-          <CardItem>
-            <Body>
-              <Image source={require('../assets/bg_drawer.png')} style={{ height: 200, width: 200, flex: 1 }} />
-              <Text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+<Card>
+            <Card.Title>Reclamation rue msaken</Card.Title>
+            <Card.Divider/>
+            <Card.Image   source={require('../assets/route3.jpeg')}></Card.Image>
+            <Card.Divider/>
+              <Text style={{marginBottom: 10}}>
+                damage par pluie
+                
               </Text>
-            </Body>
-          </CardItem>
-          <CardItem>
-            <Left>
-              <TouchableOpacity>
-                <Icon name='github-circle' size={35} />
-                <Text style={{ color: '#87838B' }}>1,926 stars</Text>
-              </TouchableOpacity>
-            </Left>
-          </CardItem>
-        </Card>
+              <Button
+                // icon={<Icon name='code' color='#ffffff' />}
+                buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                title='Détails' />
+            
+          </Card>
+
 
       </View>
     );
@@ -78,7 +69,7 @@ export default Page2Stack = createStackNavigator({
   MyPage2: {
     screen: MyPage2,
     navigationOptions: ({ navigation }) => ({
-      headerTitle: "My Page 2",
+      headerTitle: "Mes Reclamations",
       headerLeft: <View><TouchableOpacity onPress={() => { navigation.toggleDrawer() }}><Icon name='menu' size={35} /></TouchableOpacity></View>
     })
   },

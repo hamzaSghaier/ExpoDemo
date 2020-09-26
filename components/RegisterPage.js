@@ -1,15 +1,84 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, Switch } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import PopUpEchec from './PopUpEchec';
 
 export default class RegisterPage extends Component {
 
     constructor() {
         super();
         this.state = {
-            switch1Value: false,
-        }
+       
+      showAlertEchec: false,
+      popUpContent: '',
+  
+
+
+  };
+
+
     }
+
+    showAlert = () => {
+
+        this.setState({
+          showAlertEchec: true
+        });
+  
+  
+    };
+
+
+    handleSubmit = () => {
+        //const { navigation } = this.props;
+       // this.props.navigation.navigate('App');
+       console.log('teel '+this.state.tel);
+       console.log('pass '+this.state.password);
+          var url = 'https://roadinspector.herokuapp.com/auth/register';
+          Axios.post(
+            url,
+            {},
+            {
+              // headers: { 'Access-Control-Allow-Origin': '*' },
+              data: {
+                tel: this.state.tel,
+                password: this.state.password,
+                firstName : name,
+                lastName: lastName,	
+                address: adr
+              },
+            }
+          )
+            .then((res) => {
+              //AsyncStorage.setItem('jwt', data.token);
+              // AsyncStorage.setItem('jwt',res.data.token);
+              // console.log('token onboarding', res.data);
+    
+              // AsyncStorage.setItem('imei', res.data.imei);
+              // AsyncStorage.setItem('num_telephone', res.data.num_telephone);
+               AsyncStorage.setItem('token', res.data.token);
+               console.log('token  '+res.data.token);
+    
+    this.navigateToHomePage();         // alert('secccess connexion'+ res.data.token);
+              //this.props.navigation.navigate('App');
+              // this.setState({ loading: false });
+            })
+            .catch((error) => {
+              alert('verifier votre numero Télephone et mot de passe');
+             
+            });
+        
+      };
+
+
+
+
+
+
+
+
+
+
 
     toggleSwitch1 = (value) => {
         this.setState({ switch1Value: value })
@@ -55,7 +124,7 @@ export default class RegisterPage extends Component {
                 >
                     <KeyboardAwareScrollView>
                         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                            <Image source={require('../assets/icon.png')} style={styles.image} />
+                            <Image source={require('../assets/ri.jpg')} style={styles.image} />
 
                             <Text
                                 style={{
@@ -78,16 +147,22 @@ export default class RegisterPage extends Component {
                             <TextInput underlineColorAndroid='transparent' style={styles.input} />
                             <Text>Mot de passe</Text>
                             <TextInput underlineColorAndroid='transparent' style={styles.input} secureTextEntry={true} />
-                            <Text>ConfirmerMot de passe</Text>
+                            <Text>Confirmer Mot de passe</Text>
                             <TextInput underlineColorAndroid='transparent' style={styles.input} secureTextEntry={true} />
                             <View style={{ flexDirection: 'row', alignItems: 'flex-start' }}>
 
 
                             </View>
-                            <TouchableOpacity style={styles.buttonContainer}>
+                            <TouchableOpacity style={styles.buttonContainer}  onPress={() => {
+        this.showAlert();
+      }} >
                                 <Text style={styles.buttonText}> VALIDER </Text>
                             </TouchableOpacity>
-
+                            <PopUpEchec
+          popUpContent="Inscrire avec success"
+          showpopUp={this.state.showAlertEchec}
+          close={() => this.setState({ showAlertEchec: false })}
+        ></PopUpEchec>
                         </View>
                     </KeyboardAwareScrollView>
                 </View>
@@ -117,6 +192,7 @@ const styles = StyleSheet.create({
         marginTop: 50,
         height: 80,
         width: 80,
+        borderRadius: 50
 
     },
 

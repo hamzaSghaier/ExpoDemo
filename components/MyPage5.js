@@ -35,7 +35,7 @@ class MyPage5 extends Component {
 
                 </View>
 
-                <View style={styles.container}>
+        <View style={styles.container}>
           
         <MapView style={styles.mapStyle} />
       </View>

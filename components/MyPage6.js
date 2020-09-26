@@ -10,19 +10,10 @@ import { createStackNavigator, NavigationActions, StackActions } from 'react-nav
 
 
 
-const users = [
-  {
-     name: 'Oui je comfirme que cette rue est devenu dangereux',
-     avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg'
-  },
-  {
-    name: 'on mème problème dans la rue a coté',
-    avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/12.jpg'
- },
- ]
+
  
 
-class MyPage1 extends Component {
+class MyPage6 extends Component {
 
   constructor(props) {
     super(props)
@@ -66,7 +57,7 @@ class MyPage1 extends Component {
 
 
           <Text style={styles.paragraph}>
-          dégradation route 
+          dégradation d'une route 
             </Text>
           <Text style={styles.emailText}>
             26/09/2020
@@ -79,7 +70,7 @@ class MyPage1 extends Component {
                  Auteur
                 </Text>
                 <Text style={styles.cardText}>
-                  hamza hamza
+                  ahmed msakni
                 </Text>
               </Body>
             </CardItem>
@@ -92,7 +83,7 @@ class MyPage1 extends Component {
                   Déscription
                 </Text>
                 <Text style={styles.cardText}>
-                 nous avons constaté une dégradations d'un eroute et du trottoire dans notre quartier et mauvaise étatt du rue
+                La pluie a endomager tot les rue de quartier ce qui rend le déplacement est diffecile
                 </Text>
               </Body>
             </CardItem>
@@ -110,7 +101,7 @@ class MyPage1 extends Component {
 
               </Body>
             </CardItem>
-                <Image source={require('../assets/route.jpeg')} style={{ width: 'auto', height: 200 }} />
+                <Image source={require('../assets/route2.jpeg')} style={{ width: 'auto', height: 200 }} />
           </Card>
           <Card style={styles.card}>
 
@@ -139,19 +130,7 @@ class MyPage1 extends Component {
                 
 
               </Body>
-  {
-    users.map((u, i) => {
-      return (
-        <ListItem
-       
-          key={i}
-          roundAvatar
-          title={u.name}
-          leftAvatar={{ source: { uri: u.avatar } }}
-        />
-      );
-    })
-  }
+
 <View style={{flex: 1, flexDirection: 'row',width:240}}>
     <Input
         inputContainerStyle={{borderColor:'blue'}}
@@ -259,10 +238,10 @@ mapStyle: {
 
 });
 
-export default Page1Stack = createStackNavigator({
+export default Page6Stack = createStackNavigator({
 
-  MyPage1: {
-    screen: MyPage1,
+  MyPage6: {
+    screen: MyPage6,
     navigationOptions: ({ navigation }) => ({
       headerTitle: "Détails Reclamation",
       headerLeft: <View><TouchableOpacity onPress={() => { navigation.toggleDrawer() }}><Icon name='menu' size={35} /></TouchableOpacity></View>

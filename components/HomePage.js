@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Image, TouchableOpacity,SafeAreaView, ScrollView, Switch } from 'react-native';
+import { Text, View, StyleSheet, Image, TouchableOpacity,SafeAreaView, ScrollView, Switch, AsyncStorage } from 'react-native';
 import { Card, ListItem, Button } from 'react-native-elements'
 import { createStackNavigator, NavigationActions, StackActions,createDrawerNavigator } from 'react-navigation';
 import DrawerContainer from './DrawerContainer';
@@ -8,7 +8,9 @@ import MyPage2 from './MyPage2';
 import MyPage3 from './MyPage3';
 import MyPage4 from './MyPage4';
 import MyPage5 from './MyPage5';
+import MyPage6 from './MyPage6';
 import Icon from '@expo/vector-icons/MaterialCommunityIcons';
+import Axios from 'axios';
 
 let resizeMode = 'cover';
 
@@ -25,6 +27,37 @@ class HomePage extends Component {
   }
 
   toggleSwitch = (value) => this.setState({isEnabled : value});
+  handleSubmit = () => {
+    //const { navigation } = this.props;
+   // this.props.navigation.navigate('App');
+   console.log('teel '+this.state.tel);
+   console.log('pass '+this.state.password);
+      var url = 'https://roadinspector.herokuapp.com/auth/reclamations';
+      Axios.get(
+        url,
+        {},
+
+        
+      ).then((res) => {
+          //AsyncStorage.setItem('jwt', data.token);
+          // AsyncStorage.setItem('jwt',res.data.token);
+          // console.log('token onboarding', res.data);
+
+          // AsyncStorage.setItem('imei', res.data.imei);
+          // AsyncStorage.setItem('num_telephone', res.data.num_telephone);
+           AsyncStorage.setItem('token', res.data.token);
+           
+           console.log('token  '+res.data.token);
+
+          //this.props.navigation.navigate('App');
+          // this.setState({ loading: false });
+        })
+        .catch((error) => {
+          alert(' ');
+         
+        });
+    
+  };
 
   navigateToScreen = (route) => () => {
     const navigateAction = NavigationActions.navigate({
@@ -84,6 +117,35 @@ class HomePage extends Component {
             
           </Card>
           <Card>
+            <Card.Title>Reclamation </Card.Title>
+            <Switch
+        trackColor={{ false: "red", true: "green" }}
+        thumbColor={this.state.isEnabled ? "#f5dd4b" : "#f4f3f4"}
+        ios_backgroundColor="#3e3e3e"
+        //onValueChange={this.toggleSwitch(!this.state.isEnabled)}
+        value={!this.state.isEnabled}
+      />
+            <Card.Divider/>
+            <Card.Image   source={require('../assets/route2.jpeg')}></Card.Image>
+            <Card.Divider/>
+              <Text style={{marginBottom: 10}}>
+               La pluie a endomager tot les rue de quartier ce qui rend le déplacement est diffecile
+                
+              </Text>
+              <Button
+                icon={<Icon name='code' color='#ffffff' />}
+                buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                title='Détails'
+                
+                onPress={this.navigateToScreen('MyPage6')}/>
+         
+            
+          </Card>
+
+
+
+
+          <Card>
             <Card.Title>Reclamation rue msaken</Card.Title>
             <Switch
         trackColor={{ false: "red", true: "green" }}
@@ -96,7 +158,7 @@ class HomePage extends Component {
             <Card.Image   source={require('../assets/route3.jpeg')}></Card.Image>
             <Card.Divider/>
               <Text style={{marginBottom: 10}}>
-                The idea with React Native Elements is more about component structure than actual design.
+                damage par pluie
                 
               </Text>
               <Button
@@ -105,22 +167,7 @@ class HomePage extends Component {
                 title='Détails' />
             
           </Card>
-          <Card>
-            <Card.Title>Reclamation </Card.Title>
-            <Card.Divider/>
-            <Card.Image   source={require('../assets/route2.jpeg')}></Card.Image>
-            <Card.Divider/>
-              <Text style={{marginBottom: 10}}>
-                The idea with React Native Elements is more about component structure than actual design.
-                
-              </Text>
-              <Button
-                icon={<Icon name='code' color='#ffffff' />}
-                buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-                title='Détails' />
-            
-          </Card>
-
+         
         </View>
 
       </View>
@@ -179,6 +226,8 @@ const DrawerStack = createDrawerNavigator({
   MyPage3: { screen: MyPage3 },
   MyPage4: { screen: MyPage4 },
   MyPage5: { screen: MyPage5 },
+  MyPage6: { screen: MyPage6 },
+
 },
   {
     gesturesEnabled: false,

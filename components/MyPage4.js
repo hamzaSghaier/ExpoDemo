@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import {  View, StyleSheet, Image, TouchableOpacity,Platform ,TextInput,SafeAreaView, ScrollView} from 'react-native';
+import {  View, StyleSheet, Image, TouchableOpacity,Platform ,TextInput,SafeAreaView, ScrollView, AsyncStorage} from 'react-native';
 import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 import { createStackNavigator } from 'react-navigation'
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
 import { Input,Button,Text } from 'react-native-elements';
-
+import { Card, CardItem, Body } from "native-base";
+import MapView from 'react-native-maps';
+import PopUpEchec from './PopUpEchec';
+import Axios from 'axios';
 
 
 
@@ -14,11 +17,56 @@ class MyPage4 extends Component {
 
   state = {
     image: null,
-
+ 
+ 
+      showAlertEchec: false,
+      popUpContent: '',
+  
 
 
   };
 
+
+
+  handleSubmit = () => {
+    //const { navigation } = this.props;
+   // this.props.navigation.navigate('App');
+   console.log('teel '+this.state.tel);
+   console.log('pass '+this.state.password);
+      var url = 'https://roadinspector.herokuapp.com/auth/reclamations';
+      Axios.post(
+        url,
+        {},
+
+        
+      ).then((res) => {
+          //AsyncStorage.setItem('jwt', data.token);
+          // AsyncStorage.setItem('jwt',res.data.token);
+          // console.log('token onboarding', res.data);
+
+          // AsyncStorage.setItem('imei', res.data.imei);
+          // AsyncStorage.setItem('num_telephone', res.data.num_telephone);
+           AsyncStorage.setItem('token', res.data.token);
+           
+           console.log('token  '+res.data.token);
+
+          //this.props.navigation.navigate('App');
+          // this.setState({ loading: false });
+        })
+        .catch((error) => {
+          alert(' ');
+         
+        });
+    
+  };
+  showAlert = () => {
+
+      this.setState({
+        showAlertEchec: true
+      });
+
+
+  };
 
 
   componentDidMount() {
@@ -89,6 +137,36 @@ title="Ajouter des photos" onPress={this._pickImage}  />
        
        
         {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+        
+
+
+
+
+        <Card style={styles.card}>
+
+<CardItem>
+    <Body>
+    <Text style={styles.cardTitle}>
+       Position
+      </Text>
+      <View style={styles.container2}>
+
+
+</View>  
+      
+
+    </Body>
+  </CardItem>
+  <MapView style={{ width: 200, height: 200 }} />
+</Card>
+
+
+
+
+
+
+
+
 
 
         
@@ -102,9 +180,16 @@ title="Ajouter des photos" onPress={this._pickImage}  />
           }
          style={{ marginTop:25 }}
       title="Ajouter La Reclamation"
+      onPress={() => {
+        this.showAlert();
+      }}
         />
      </View>
-     
+     <PopUpEchec
+          popUpContent="Reclamation ajouter avec success"
+          showpopUp={this.state.showAlertEchec}
+          close={() => this.setState({ showAlertEchec: false })}
+        ></PopUpEchec>
    
      </ScrollView>
     </SafeAreaView>  

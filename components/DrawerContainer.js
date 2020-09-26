@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, ImageBackground, AsyncStorage } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 
@@ -9,16 +9,35 @@ export default class DrawerContainer extends React.Component {
 
   constructor(props) {
     super(props)
+    this.state = {
+      name: '',
+      
+    }
   }
 
 
   navigateToScreen = (route) => () => {
     const navigateAction = NavigationActions.navigate({
       routeName: route
-    });
+    });  
     this.props.navigation.dispatch(navigateAction);
   }
+    componentDidMount(){
 
+      // this.getName()
+    }
+
+    // getName(){
+
+      
+    //     AsyncStorage.getItem('firstName').then((value) => {
+          
+    //       this.setState({ name : value})
+
+    //     })
+  
+ 
+    // }
 
   render() {
 
@@ -39,22 +58,22 @@ export default class DrawerContainer extends React.Component {
 
               <View style={{ marginLeft: 10 }}>
                 <TouchableOpacity>
-                  <Image source={require("../assets/icon.png")}
+                  <Image source={require("../assets/ri.jpg")}
                     style={{
                       borderWidth: 1,
                       borderColor: 'rgba(0,0,0,0.2)',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      width: 75,
+                      width: 75,  
                       height: 75,
                       borderRadius: 100,
                     }}
                   />
-                <Text style={{ color: 'white', fontSize: 14, marginTop: 10 }}>
-                 Hamza Sghaier
-                </Text>
+               
+                
                 <Text style={{ color: 'white', fontSize: 14 }}>
-                  50145579
+                    {/* { this.state.name} */}
+                    Yassine Guezgez
                 </Text>
                 </TouchableOpacity>
               </View>
@@ -66,51 +85,50 @@ export default class DrawerContainer extends React.Component {
             <View style={styles.navSectionStyle}>
               <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen('HomePage')}>
                 <Icon name='home' size={iconSize} style={styles.drawerIcon} />
-                <Text style={styles.navItemStyle} >Home</Text>
+                <Text style={styles.navItemStyle} >Acceuil</Text>
               </TouchableOpacity>
             </View>
 
-            <Text style={styles.sectionHeadingStyle}> Section 1 </Text>
+            <Text style={styles.sectionHeadingStyle}>  </Text>
 
             <View style={styles.navSectionStyle}>
 
-              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen('MyPage1')}>
+              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen('MyPage3')}>
                 <Icon name='account' size={iconSize} style={styles.drawerIcon} />
-                <Text style={styles.navItemStyle} >Page 1</Text>
+                <Text style={styles.navItemStyle} >Profile</Text>
               </TouchableOpacity>
-
               <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen('MyPage2')}>
                 <Icon name='clipboard-text' size={iconSize} style={styles.drawerIcon} />
-                <Text style={styles.navItemStyle}>Page 2</Text>
+                <Text style={styles.navItemStyle}>Mes reclamations</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen('MyPage3')}>
+              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen('HomePage')}>
                 <Icon name='animation' size={iconSize} style={styles.drawerIcon} />
-                <Text style={styles.navItemStyle}>Page 3</Text>
+                <Text style={styles.navItemStyle}>Consulter</Text>
               </TouchableOpacity>
 
             </View>
 
-            <Text style={styles.sectionHeadingStyle}> Section 2 </Text>
+            <Text style={styles.sectionHeadingStyle}> </Text>
 
             <View style={styles.navSectionStyle}>
 
               <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen('MyPage4')}>
                 <Icon name='rss' size={iconSize} style={styles.drawerIcon} />
-                <Text style={styles.navItemStyle} >Page 4</Text>
+                <Text style={styles.navItemStyle} >Ajouter Reclamation</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen('MyPage5')}>
+              {/* <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen('MyPage5')}>
                 <Icon name='application' size={iconSize} style={styles.drawerIcon} />
                 <Text style={styles.navItemStyle} >Page 5</Text>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
 
             </View>
           </View>
         </ScrollView>
 
-        <View style={styles.footerContainer}>
-          <TouchableOpacity style={styles.drawerMenu}>
+        <View style={styles.footerContainer} >
+          <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen('Login')} >
             <Icon name='logout' size={iconSize} style={styles.drawerIcon} />
             <Text style={styles.navItemStyle} >Déconnecter !</Text>
           </TouchableOpacity>

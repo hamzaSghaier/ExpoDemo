@@ -7,18 +7,19 @@ import {
   StyleSheet,
   Alert,
   TouchableOpacity,
+  AsyncStorage,
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { createStackNavigator, NavigationActions, StackActions } from 'react-navigation';
 import HomePage from './HomePage';
 import RegisterPage from './RegisterPage';
-
+import Axios from 'axios';
 class Login extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      email: '',
+      tel: '',
       password: '',
     }
   }
@@ -27,9 +28,46 @@ class Login extends Component {
     // this.callAlert("Notice", "Email: johndoe@gmail.com | Password: 123456", null)
   }
 
+  handleSubmit = () => {
+    //const { navigation } = this.props;
+   // this.props.navigation.navigate('App');
+   console.log('teel '+this.state.tel);
+   console.log('pass '+this.state.password);
+      var url = 'https://roadinspector.herokuapp.com/auth/login';
+      Axios.post(
+        url,
+        {},
+        {
+          // headers: { 'Access-Control-Allow-Origin': '*' },
+          data: {
+            tel: this.state.tel,
+            password: this.state.password,
+          },
+        }
+      )
+        .then((res) => {
+          //AsyncStorage.setItem('jwt', data.token);
+          // AsyncStorage.setItem('jwt',res.data.token);
+          // console.log('token onboarding', res.data);
 
-  setEmail(email) {
-    this.setState({ email })
+          // AsyncStorage.setItem('imei', res.data.imei);
+           AsyncStorage.setItem('firstName', res.data.firstName);
+           AsyncStorage.setItem('token', res.data.token);
+           console.log('token  '+res.data.token);
+           console.log('token  '+res.data.firstName);
+
+this.navigateToHomePage();         // alert('secccess connexion'+ res.data.token);
+          //this.props.navigation.navigate('App');
+          // this.setState({ loading: false });
+        })
+        .catch((error) => {
+          alert('verifier votre numero Télephone et mot de passe');
+         
+        });
+    
+  };
+  setEmail(tel) {
+    this.setState({ tel })
   }
 
   setPassword(password) {
@@ -122,7 +160,7 @@ class Login extends Component {
         >
           <KeyboardAwareScrollView>
             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-              <Image source={require('../assets/icon.png')} style={styles.image} />
+              <Image source={require('../assets/ri.jpg')} style={styles.image} />
 
               <Text
                 style={{
@@ -135,11 +173,11 @@ class Login extends Component {
             </View>
 
             <View style={styles.main}>
-              <TextInput underlineColorAndroid='transparent' onChangeText={(text) => this.setEmail(text)} style={styles.input} placeholder="login" />
+              <TextInput underlineColorAndroid='transparent' onChangeText={(text) => this.setEmail(text)} style={styles.input} placeholder="Télphone" />
 
               <TextInput underlineColorAndroid='transparent' onChangeText={(text) => this.setPassword(text)} style={styles.input} placeholder="Mot de passe" secureTextEntry={true} />
 
-              <TouchableOpacity style={styles.buttonContainer} onPress={() => this.auth()} >
+              <TouchableOpacity style={styles.buttonContainer} onPress={() =>  this.handleSubmit()} >
                 <Text style={styles.buttonText}> SE CONNECTER </Text>
               </TouchableOpacity>
 
@@ -176,6 +214,7 @@ const styles = StyleSheet.create({
     marginTop: 50,
     height: 80,
     width: 80,
+    borderRadius :50
 
   },
   buttonContainer: {

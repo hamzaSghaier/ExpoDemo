@@ -2,17 +2,22 @@
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
   "dependencies": {
+    "axios": "^0.19.2",
     "expo": "^37.0.0",
+    "expo-image-picker": "~8.1.0",
     "native-base": "^2.13.14",
+    "prop-types": "^15.7.2",
     "react": "16.9.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-37.0.1.tar.gz",
+    "react-native": "^0.61.4",
+    "@react-native-community/async-storage": "^1.11.0",
     "react-native-elements": "^2.3.2",
     "react-native-image-picker": "^2.3.3",
     "react-native-keyboard-aware-scroll-view": "^0.8.0",
     "react-native-maps": "^0.27.1",
+    "react-native-stats": "^1.0.0",
+    "react-native-sweet-alert": "^2.1.0",
     "react-navigation": "^2.9.3",
     "react-timer-mixin": "^0.13.4",
-    "reactstrap": "^8.5.1",
-    "expo-image-picker": "~8.1.0"
+    "reactstrap": "^8.5.1"
   }
 }

@@ -54,7 +54,7 @@ class MyPage3 extends Component {
            Compte
             </Text>
           <Text style={styles.emailText}>
-            Hamza Sghaier
+            Yassine Guezgez
             </Text>
       <Button
           type="outline"
